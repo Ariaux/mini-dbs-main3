@@ -1,0 +1,79 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.tuberlin.dima</groupId>
+        <artifactId>minidbs</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>..</relativePath>
+    </parent>
+
+    <artifactId>minidbs-impl</artifactId>
+    <name>minidbs-impl</name>
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.release>8</maven.compiler.release>
+        <maven.test.skip>true</maven.test.skip>
+    </properties>
+
+    <dependencies>
+
+        <!-- minidbs artifacts -->
+        <dependency>
+            <groupId>de.tuberlin.dima</groupId>
+            <artifactId>minidbs-impl-reference</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.tuberlin.dima</groupId>
+            <artifactId>minidbs-core</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>*</exclude>
+                </excludes>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.java</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <groupId>de.tuberlin.dima</groupId>
+                    <artifactId>minidbs-impl-reference</artifactId>
+                    <version>1.0.0-SNAPSHOT</version>
+                    <packaging>jar</packaging>
+                    <file>src/main/resources/minidbs-impl-reference.jar</file>
+                    <generatePom>true</generatePom>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>install-jar-lib</id>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <phase>validate</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
